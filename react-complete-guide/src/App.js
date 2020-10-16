@@ -4,6 +4,7 @@ import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
+  //This is a statefull/smart/container component because we are using state here.
   state = {
     persons: [
       { name: 'Abhishek', age: 32 },
@@ -12,18 +13,21 @@ class App extends Component {
     ]
   }
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     //console.log('Was clicked');
     //DON'T DO THIS: this.state.persons[0].name = 'Abhishek Dagwar'
     this.setState({
       persons: [
-        { name: 'Abhishek Dagwar', age: 33 },
+        { name: newName, age: 33 },
         { name: 'Suhas Dagwar', age: 30 },
         { name: 'Rahul Dagwar', age: 29}
       ]
     })
   }
 
+//Create a passing reference for Person file.
+//() => this.methodName(param) --- This is a inefficient way if an app is big
+//this.methodName.bind(this, param) -- Try using this whenever possible.
   render() {
     return (
       <div className="App">
@@ -32,14 +36,21 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p>
-          <button onClick = {this.switchNameHandler}>Switch Name</ button>
+          <button onClick = {() => this.switchNameHandler('Abhishek Dagwar')}>Switch Name</ button>
         </ p>
         <p className="App-intro">
           This is my first React App.
         </p>
-        <Person name = {this.state.persons[0].name} age = {this.state.persons[0].age} />
-        <Person name = {this.state.persons[1].name} age = {this.state.persons[1].age} > My Hobbey: Cricket</ Person>
-        <Person name = {this.state.persons[2].name} age = {this.state.persons[2].age} />
+        <Person
+          name = {this.state.persons[0].name}
+          age = {this.state.persons[0].age} />
+        <Person
+          name = {this.state.persons[1].name}
+          age = {this.state.persons[1].age}
+          click = {this.switchNameHandler.bind(this, 'Abhi Dagwar')}> My Hobbey: Cricket</ Person>
+        <Person
+          name = {this.state.persons[2].name}
+          age = {this.state.persons[2].age} />
       </div>
     );
   }
