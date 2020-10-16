@@ -39,6 +39,15 @@ nameChangedHandler = (event) => {
   //() => this.methodName(param) --- This is a inefficient way if an app is big
   //this.methodName.bind(this, param) -- Try using this whenever possible.
   render() {
+
+const styleConst = {
+  backgroundColor: 'white',
+  font: 'inherit',
+  boarder: '1px solid blue',
+  padding: '8px',
+  cursor: 'pointer'
+};
+
     return (
       <div className="App">
         <header className="App-header">
@@ -46,7 +55,9 @@ nameChangedHandler = (event) => {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p>
-          <button onClick = {() => this.switchNameHandler('Abhishek Dagwar')}>Switch Name</ button>
+          <button
+            style = {styleConst}
+            onClick = {() => this.switchNameHandler('Abhishek Dagwar')}>Switch Name</ button>
         </ p>
         <p className="App-intro">
           This is my first React App.
