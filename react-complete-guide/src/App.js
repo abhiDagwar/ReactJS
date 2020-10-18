@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Radium from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -75,14 +76,24 @@ class App extends Component {
   //() => this.methodName(param) --- This is a inefficient way if an app is big
   //this.methodName.bind(this, param) -- Try using this whenever possible.
   render() {
+    //Install third party lib radium for stylling into the app.
+    //Radium is a popular third party package for react which allow us to use inline style with sudo selectors(see :hover in styleConst) and media queries.
+    //Open terminal -> Go to the project root directory.
+    //Type command: npm install --save radium
+    //This command will save radium into your project structure.
 
+    //Inline style
     const styleConst = {
       backgroundColor: 'green',
       color: 'white',
       font: 'inherit',
       boarder: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover' : {
+        backgroundColor: 'lightGreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -102,6 +113,10 @@ class App extends Component {
       );
 
       styleConst.backgroundColor = 'red';
+      styleConst[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      };
     }
 
     //Create a array of style to apply on p className using js
@@ -135,4 +150,5 @@ class App extends Component {
   }
 }
 
-export default App;
+//Wrap higher order component with App. (i.e. Injecting Radium component into App component to use Radium features into the App)
+export default Radium(App);
