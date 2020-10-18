@@ -10,7 +10,8 @@ class App extends Component {
       { name: 'Abhishek', age: 32 },
       { name: 'Suhas', age: 30 },
       { name: 'Rahul', age: 29}
-    ]
+    ],
+    showPerson: false
   }
 
   switchNameHandler = (newName) => {
@@ -35,6 +36,11 @@ nameChangedHandler = (event) => {
   })
 }
 
+togglePersonHandler = () => {
+  const doesShow = this.state.showPerson;
+  this.setState({showPerson: !doesShow});
+}
+
   //Create a passing reference for Person file.
   //() => this.methodName(param) --- This is a inefficient way if an app is big
   //this.methodName.bind(this, param) -- Try using this whenever possible.
@@ -57,22 +63,26 @@ const styleConst = {
         <p>
           <button
             style = {styleConst}
-            onClick = {() => this.switchNameHandler('Abhishek Dagwar')}>Switch Name</ button>
+            onClick = {this.togglePersonHandler}>Toggle Persons</ button>
         </ p>
         <p className="App-intro">
           This is my first React App.
         </p>
-        <Person
-          name = {this.state.persons[0].name}
-          age = {this.state.persons[0].age} />
-        <Person
-          name = {this.state.persons[1].name}
-          age = {this.state.persons[1].age}
-          click = {this.switchNameHandler.bind(this, 'Abhi Dagwar')}
-          change={this.nameChangedHandler}> My Hobbey: Cricket</ Person>
-        <Person
-          name = {this.state.persons[2].name}
-          age = {this.state.persons[2].age} />
+        { this.state.showPerson ?
+          <div>
+            <Person
+              name = {this.state.persons[0].name}
+              age = {this.state.persons[0].age} />
+            <Person
+              name = {this.state.persons[1].name}
+              age = {this.state.persons[1].age}
+              click = {this.switchNameHandler.bind(this, 'Abhi Dagwar')}
+              change={this.nameChangedHandler}> My Hobbey: Cricket</ Person>
+            <Person
+              name = {this.state.persons[2].name}
+              age = {this.state.persons[2].age} />
+          </ div> : null
+        }
       </div>
     );
   }
