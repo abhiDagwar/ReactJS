@@ -59,18 +59,12 @@ togglePersonHandler = () => {
     if (this.state.showPerson) {
       persons = (
         <div>
-          <Person
-            name = {this.state.persons[0].name}
-            age = {this.state.persons[0].age} />
-          <Person
-            name = {this.state.persons[1].name}
-            age = {this.state.persons[1].age}
-            click = {this.switchNameHandler.bind(this, 'Abhi Dagwar')}
-            change={this.nameChangedHandler}> My Hobbey: Cricket</ Person>
-          <Person
-            name = {this.state.persons[2].name}
-            age = {this.state.persons[2].age} />
-        </ div>
+          {this.state.persons.map(personObj => {
+            return <Person
+              name = {personObj.name}
+              age = {personObj.age}/>
+          })}
+        </div>
       );
     }
 
