@@ -15,7 +15,18 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons;
+    //Adding this.state.persons to const persons is adding a pointer to the reference object persons which directly manupulate the actual
+    //array. And which can led to unpredictable errors.
+
+    //const persons = this.state.persons;
+
+    //A good practice to avoid this kind of errors is to copy the object instead of putting a reference.
+    //The one way to do is simply add slice() with the object
+    //const persons = this.state.persons.slice();
+
+    //Another approach to copy object is to use a es6 feature of 'js  that is use spread operator i.e. a three dots (...)
+    const persons = [...this.state.persons];
+    
     //This will remove person from persons array by 1 element
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
