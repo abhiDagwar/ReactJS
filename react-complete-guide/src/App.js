@@ -14,32 +14,27 @@ class App extends Component {
     showPerson: false
   }
 
-  switchNameHandler = (newName) => {
-    //console.log('Was clicked');
-    //DON'T DO THIS: this.state.persons[0].name = 'Abhishek Dagwar'
+  deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons;
+    //This will remove person from persons array by 1 element
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
+  }
+
+  nameChangedHandler = (event) => {
     this.setState({
       persons: [
-        { name: newName, age: 33 },
-        { name: 'Suhas Dagwar', age: 30 },
+        { name: 'Abhishek Dagwar', age: 33 },
+        { name: event.target.value, age: 30 },
         { name: 'Rahul Dagwar', age: 29}
       ]
     })
   }
 
-nameChangedHandler = (event) => {
-  this.setState({
-    persons: [
-      { name: 'Abhishek Dagwar', age: 33 },
-      { name: event.target.value, age: 30 },
-      { name: 'Rahul Dagwar', age: 29}
-    ]
-  })
-}
-
-togglePersonHandler = () => {
-  const doesShow = this.state.showPerson;
-  this.setState({showPerson: !doesShow});
-}
+  togglePersonHandler = () => {
+    const doesShow = this.state.showPerson;
+    this.setState({showPerson: !doesShow});
+  }
 
   //Create a passing reference for Person file.
   //() => this.methodName(param) --- This is a inefficient way if an app is big
@@ -59,8 +54,9 @@ togglePersonHandler = () => {
     if (this.state.showPerson) {
       persons = (
         <div>
-          {this.state.persons.map(personObj => {
+          {this.state.persons.map((personObj, index) => {
             return <Person
+              click = {() => this.deletePersonHandler(index)}
               name = {personObj.name}
               age = {personObj.age}/>
           })}
