@@ -46,13 +46,33 @@ togglePersonHandler = () => {
   //this.methodName.bind(this, param) -- Try using this whenever possible.
   render() {
 
-const styleConst = {
-  backgroundColor: 'white',
-  font: 'inherit',
-  boarder: '1px solid blue',
-  padding: '8px',
-  cursor: 'pointer'
-};
+    const styleConst = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      boarder: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
+    let persons = null;
+
+    if (this.state.showPerson) {
+      persons = (
+        <div>
+          <Person
+            name = {this.state.persons[0].name}
+            age = {this.state.persons[0].age} />
+          <Person
+            name = {this.state.persons[1].name}
+            age = {this.state.persons[1].age}
+            click = {this.switchNameHandler.bind(this, 'Abhi Dagwar')}
+            change={this.nameChangedHandler}> My Hobbey: Cricket</ Person>
+          <Person
+            name = {this.state.persons[2].name}
+            age = {this.state.persons[2].age} />
+        </ div>
+      );
+    }
 
     return (
       <div className="App">
@@ -68,21 +88,7 @@ const styleConst = {
         <p className="App-intro">
           This is my first React App.
         </p>
-        { this.state.showPerson ?
-          <div>
-            <Person
-              name = {this.state.persons[0].name}
-              age = {this.state.persons[0].age} />
-            <Person
-              name = {this.state.persons[1].name}
-              age = {this.state.persons[1].age}
-              click = {this.switchNameHandler.bind(this, 'Abhi Dagwar')}
-              change={this.nameChangedHandler}> My Hobbey: Cricket</ Person>
-            <Person
-              name = {this.state.persons[2].name}
-              age = {this.state.persons[2].age} />
-          </ div> : null
-        }
+        {persons}
       </div>
     );
   }
