@@ -38,14 +38,32 @@ class App extends Component {
     this.setState({persons: persons});
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Abhishek Dagwar', age: 33 },
-        { name: event.target.value, age: 30 },
-        { name: 'Rahul Dagwar', age: 29}
-      ]
-    })
+  //In nameChangedHandler, we now are checking the id of which user start to type something in the input bod and
+  //based on the cell/row/box user type, the change will occur on the respective cell/row/box. Which was not editable before
+  //for 1st and 3rd cell/row/box.
+  nameChangedHandler = (event, id) => {
+    //Find the id from a persons array to match with the id of the index.
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    //With spread operator(recommended)
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    //Without spread operator. js function.
+    //const person = Object.assign({}, this.state.persons[personIndex]);
+
+    //Assign a value typed by a user to the person object
+    person.name = event.target.value
+
+    //Add the updated person value to the persons array.
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    //Now set it to the state of persons array.
+
+    this.setState({persons: persons});
   }
 
   togglePersonHandler = () => {
@@ -76,7 +94,8 @@ class App extends Component {
               click = {() => this.deletePersonHandler(index)}
               name = {personObj.name}
               age = {personObj.age}
-              key = {personObj.id}/>
+              key = {personObj.id}
+              changed = {(event) => this.nameChangedHandler(event, personObj.id)}/>
           })}
         </div>
       );
