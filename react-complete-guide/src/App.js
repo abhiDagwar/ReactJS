@@ -104,6 +104,17 @@ class App extends Component {
       styleConst.backgroundColor = 'red';
     }
 
+    //Create a array of style to apply on p className using js
+    const styleClassesArray = [];
+
+    if (this.state.persons.length <= 2) {
+      styleClassesArray.push('red'); // styleClassesArray['red']
+    }
+
+    if (this.state.persons.length <= 1) {
+      styleClassesArray.push('bold'); // styleClassesArray['red', 'bold']
+    }
+
     return (
       <div className="App">
         <header className="App-header">
@@ -115,7 +126,7 @@ class App extends Component {
             style = {styleConst}
             onClick = {this.togglePersonHandler}>Toggle Persons</ button>
         </ p>
-        <p className="App-intro">
+        <p className={styleClassesArray.join(' ')}>
           This is my first React App.
         </p>
         {persons}
