@@ -5,11 +5,17 @@ import Person from './Person/Person';
 
 class App extends Component {
   //This is a statefull/smart/container component because we are using state here.
+  //Added a unique key to the list to remove the warning from the console.
+  //The key is an important factor when we update list. If we do not use key the react compare old list to the new list and update (render)
+  //the whole lists which is inefficient way to do if we have a large list.
+  //The efficient way to solved this is to use unique key to the array which react can compare with the list and render only that element
+  //which needs to upate and not the whole list.
+  //Here we are adding a dummy id to show how it works but in real app it could be coming from database or when calling an API from server.
   state = {
     persons: [
-      { name: 'Abhishek', age: 32 },
-      { name: 'Suhas', age: 30 },
-      { name: 'Rahul', age: 29}
+      { id: '1', name: 'Abhishek', age: 32 },
+      { id: '2', name: 'Suhas', age: 30 },
+      { id: '3', name: 'Rahul', age: 29}
     ],
     showPerson: false
   }
@@ -26,7 +32,7 @@ class App extends Component {
 
     //Another approach to copy object is to use a es6 feature of 'js  that is use spread operator i.e. a three dots (...)
     const persons = [...this.state.persons];
-    
+
     //This will remove person from persons array by 1 element
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
@@ -69,7 +75,8 @@ class App extends Component {
             return <Person
               click = {() => this.deletePersonHandler(index)}
               name = {personObj.name}
-              age = {personObj.age}/>
+              age = {personObj.age}
+              key = {personObj.id}/>
           })}
         </div>
       );
