@@ -5,7 +5,7 @@ import './Person.css'
 //This is a stateless/dumb/presentational component because we are not using state here.
 const person = (props) => {
   //A radium psudo selector media query is used to fixed the component box width to 450px.
-  //500px is the width when we go below 450px the boxes will limit itself to 60% of the view.
+  //500px is the min-width. When we go below 450px the boxes will limit itself to 60% of the view as mentioned in Person.css.
   const styleConst = {
     '@media (min-width: 500px)': {
       width: '450px'
