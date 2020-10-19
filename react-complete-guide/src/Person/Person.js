@@ -29,12 +29,13 @@ const person = (props) => {
   };
   //Passing method reference between component.
   return (
+    //Using custom StyleDiv instead of div for styled-components
+    //<div className="Person" style={styleConst}>
+    //</ div>
     <StyleDiv>
-      <div className="Person" style={styleConst}>
-        <p onClick={props.click}>I am {props.name} and I am {props.age} years old.</p>
-        <p>{props.children}</ p>
-        <input type="text" onChange={props.changed} value={props.name}/>
-      </ div>
+      <p onClick={props.click}>I am {props.name} and I am {props.age} years old.</p>
+      <p>{props.children}</ p>
+      <input type="text" onChange={props.changed} value={props.name}/>
     </StyleDiv>
   )
 };
