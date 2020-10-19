@@ -1,35 +1,8 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
-
-
-/* Styled-components helps you to write normal css format in your variable and don't need to add inline css.
-    It is independant of React.
-    Also you can use psudo style in css for critical properties like hover with & using infornt.
-    Insated of button tag we can use StyledButton tag
-    Behind the scene this is just a js with a string quoted in backtick(``) which is then render in js and creates css-style
-    The condition for hover is also we can use inside the StyledButton using
-    ternary operator using a props that we use earlier
-    for connection between App and Person js.
-    When you inspect the element in the browser you can see it creates css-style automatically.
-*/
-
-const StyledButton = styled.button`
-  background-color : ${props => props.alt ? 'red' : 'green'};
-  color : white;
-  font : inherit;
-  boarder : 1px solid blue;
-  padding : 8px;
-  cursor : pointer;
-
-  &:hover {
-    background-color : ${props => props.alt ? 'salmon' : 'lightgreen'};
-    color : black;
-  }
-`;
 
 class App extends Component {
   //This is a statefull/smart/container component because we are using state here.
@@ -164,9 +137,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p>
-          <StyledButton alt = {this.state.showPerson} onClick = {this.togglePersonHandler}>
+          <button className = "button" onClick = {this.togglePersonHandler}>
             Toggle Persons
-          </StyledButton>
+          </button>
         </ p>
         <p className={styleClassesArray.join(' ')}>
           This is my first React App.
