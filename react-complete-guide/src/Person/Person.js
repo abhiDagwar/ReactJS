@@ -22,11 +22,7 @@ const person = (props) => {
     }
 
   `;
-  const styleConst = {
-    '@media (min-width: 500px)': {
-      width: '450px'
-    }
-  };
+
   //Passing method reference between component.
   return (
     //Using custom StyleDiv instead of div for styled-components

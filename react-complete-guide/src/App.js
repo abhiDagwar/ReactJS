@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
+
+
+//Styled-components helps you to write normal css format in your variable and don't need to add inline css.
+//Also you can use psudo style in css for critical properties like hover with & using infornt.
+//Insated of button tag we can use StyledButton tag
+
+const StyledButton = styled.button`
+  background-color: green;
+  color: white;
+  font: inherit;
+  boarder: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lightGreen;
+    color: black;
+  }
+`;
 
 class App extends Component {
   //This is a statefull/smart/container component because we are using state here.
@@ -136,9 +157,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p>
-          <button
-            style = {styleConst}
-            onClick = {this.togglePersonHandler}>Toggle Persons</ button>
+          <StyledButton onClick = {this.togglePersonHandler}>
+            Toggle Persons
+          </StyledButton>
         </ p>
         <p className={styleClassesArray.join(' ')}>
           This is my first React App.
