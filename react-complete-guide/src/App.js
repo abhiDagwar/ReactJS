@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -131,7 +130,6 @@ class App extends Component {
     }
 
     return (
-    <StyleRoot>
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -147,10 +145,9 @@ class App extends Component {
         </p>
         {persons}
       </div>
-    </StyleRoot>
     );
   }
 }
 
 //Wrap higher order component with App. (i.e. Injecting Radium component into App component to use Radium features into the App)
-export default Radium(App);
+export default App;
