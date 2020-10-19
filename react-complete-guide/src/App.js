@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -131,6 +131,7 @@ class App extends Component {
     }
 
     return (
+    <StyleRoot>
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -146,6 +147,7 @@ class App extends Component {
         </p>
         {persons}
       </div>
+    </StyleRoot>
     );
   }
 }

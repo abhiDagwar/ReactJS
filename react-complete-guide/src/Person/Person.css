@@ -6,3 +6,10 @@
   padding: 16px;
   text-align: center;
 }
+
+/*Media query example using css */
+/* @@media (min-width: 500px) {
+  .Person {
+      width: 450px;
+  }
+} */
