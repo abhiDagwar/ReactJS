@@ -98,7 +98,7 @@ class App extends Component {
   //this.methodName.bind(this, param) -- Try using this whenever possible.
   render() {
     let persons = null;
-    let btnClassArray = [cssClasses.Button];
+    let btnClassArray = '';
 
     if (this.state.showPerson) {
       persons = (
@@ -113,7 +113,7 @@ class App extends Component {
           })}
         </div>
       );
-      btnClassArray.push(cssClasses.Red);
+      btnClassArray = cssClasses.Red;
     }
 
     //Create a array of style to apply on p className using js
@@ -134,7 +134,7 @@ class App extends Component {
           <h1 className={cssClasses.title}>Welcome to React</h1>
         </header>
         <p>
-          <button className = {btnClassArray.join(' ')} onClick = {this.togglePersonHandler}>
+          <button className = {btnClassArray} onClick = {this.togglePersonHandler}>
             Toggle Persons
           </button>
         </ p>
