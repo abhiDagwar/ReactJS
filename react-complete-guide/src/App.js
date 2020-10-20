@@ -1,8 +1,29 @@
 import React, { Component } from 'react';
 
 import logo from './logo.svg';
-import './App.css';
+import cssClasses from './App.css';
 import Person from './Person/Person';
+
+/*
+  The another approach to use css without third party component is to use css-module concept.
+  To use the css-module in the project, we need to tweak the project configuration file i.e. build configuration.
+  The advantage of css-module is that we can use our css to a specific file and not in the all project.
+  If we add now something in the App.css it will apply to the project level. But using css-module we can use it in a specific file.
+  First we will see how we can leverage the css-module into our project for "react-scripts": "1.1.5".
+  For version 2 or higher it requires some additional changes.
+  We will discuss the changes requires in the version 2 or higher also. But first let's change it for version "1.*.*".
+  For css-module, open the terminal and go to the project directory root.
+  Note: When running eject command if you get error then please commit your changes to the git first if you are using git.
+  Type command: npm run eject. This command basically eject from the under the hood configuration of your package.json config file,
+  doing so now you get the access of 'config' folder where you can see the webpack config file and so on, which will not be accessible to you before.
+  You can see that package.json file is also change and you can have access to the more packages.
+  The 'webpack.config.dev.js' and 'webpack.config.prod.js' are the files which are used under the hood by package.json tooling.
+  This are the packages used for creating create-react-app and running the local server.
+  Now go to the webpack dev file and find 'test: /\.css$/' where you can find 'options: {importLoaders: 1,}.
+  Add new options below "importLoaders", "modules: true," and "localItendName: '[name]__[local]__[hash:base64:5]'"
+  Now do the same with webpack prod file.
+  After that run command "npm start" in the terminal.
+*/
 
 class App extends Component {
   //This is a statefull/smart/container component because we are using state here.
@@ -76,27 +97,8 @@ class App extends Component {
   //() => this.methodName(param) --- This is a inefficient way if an app is big
   //this.methodName.bind(this, param) -- Try using this whenever possible.
   render() {
-    //Install third party lib radium for stylling into the app.
-    //Radium is a popular third party package for react which allow us to use inline style with sudo selectors(see :hover in styleConst) and media queries.
-    //Open terminal -> Go to the project root directory.
-    //Type command: npm install --save radium
-    //This command will save radium into your project structure.
-
-    //Inline style
-    const styleConst = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      boarder: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover' : {
-        backgroundColor: 'lightGreen',
-        color: 'black'
-      }
-    };
-
     let persons = null;
+    let btnClassArray = [cssClasses.Button];
 
     if (this.state.showPerson) {
       persons = (
@@ -111,33 +113,28 @@ class App extends Component {
           })}
         </div>
       );
-
-      // styleConst.backgroundColor = 'red';
-      // styleConst[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // };
+      btnClassArray.push(cssClasses.Red);
     }
 
     //Create a array of style to apply on p className using js
     const styleClassesArray = [];
 
     if (this.state.persons.length <= 2) {
-      styleClassesArray.push('red'); // styleClassesArray['red']
+      styleClassesArray.push(cssClasses.red); // styleClassesArray['red']
     }
 
     if (this.state.persons.length <= 1) {
-      styleClassesArray.push('bold'); // styleClassesArray['red', 'bold']
+      styleClassesArray.push(cssClasses.bold); // styleClassesArray['red', 'bold']
     }
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+    <div className={cssClasses.App}>
+        <header className={cssClasses.header}>
+          <img src={logo} className={cssClasses.logo} alt="logo" />
+          <h1 className={cssClasses.title}>Welcome to React</h1>
         </header>
         <p>
-          <button className = "button" onClick = {this.togglePersonHandler}>
+          <button className = {btnClassArray.join(' ')} onClick = {this.togglePersonHandler}>
             Toggle Persons
           </button>
         </ p>
