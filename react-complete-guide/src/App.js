@@ -23,6 +23,8 @@ import Person from './Person/Person';
   Add new options below "importLoaders", "modules: true," and "localItendName: '[name]__[local]__[hash:base64:5]'"
   Now do the same with webpack prod file.
   After that run command "npm start" in the terminal.
+  For higher version like 2, just rename the css file name. e.g. App.css to App.module.css and
+  it will unlock css-module without running npm eject command.
 */
 
 class App extends Component {
