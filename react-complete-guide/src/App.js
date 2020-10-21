@@ -27,6 +27,11 @@ import Person from './Person/Person';
   it will unlock css-module without running npm eject command.
 */
 
+/*
+  For dubugging of an application in chrome browser use:
+  React Developers Tools
+*/
+
 class App extends Component {
   //This is a statefull/smart/container component because we are using state here.
   //Added a unique key to the list to remove the warning from the console.
