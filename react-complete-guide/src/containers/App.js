@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import logo from './logo.svg';
 import cssClasses from './App.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 /*
   The another approach to use css without third party component is to use css-module concept.
@@ -105,51 +105,22 @@ class App extends Component {
   //this.methodName.bind(this, param) -- Try using this whenever possible.
   render() {
     let persons = null;
-    let btnClassArray = '';
 
     if (this.state.showPerson) {
-      persons = (
-        <div>
-          {this.state.persons.map((personObj, index) => {
-            return <Person
-              click = {() => this.deletePersonHandler(index)}
-              name = {personObj.name}
-              age = {personObj.age}
-              key = {personObj.id}
-              changed = {(event) => this.nameChangedHandler(event, personObj.id)}/>
-          })}
-        </div>
-      );
-      btnClassArray = cssClasses.Red;
-    }
-
-    //Create a array of style to apply on p className using js
-    const styleClassesArray = [];
-
-    if (this.state.persons.length <= 2) {
-      styleClassesArray.push(cssClasses.red); // styleClassesArray['red']
-    }
-
-    if (this.state.persons.length <= 1) {
-      styleClassesArray.push(cssClasses.bold); // styleClassesArray['red', 'bold']
+      persons = <Persons 
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangedHandler}  />;
     }
 
     return (
     <div className={cssClasses.App}>
-        <header className={cssClasses.header}>
-          <img src={logo} className={cssClasses.logo} alt="logo" />
-          <h1 className={cssClasses.title}>Welcome to React</h1>
-        </header>
-        <p>
-          <button className = {btnClassArray} onClick = {this.togglePersonHandler}>
-            Toggle Persons
-          </button>
-        </ p>
-        <p className={styleClassesArray.join(' ')}>
-          This is my first React App.
-        </p>
-        {persons}
-      </div>
+      <Cockpit 
+        showPerson={this.state.showPerson}
+        persons={this.state.persons}
+        clicked={this.togglePersonHandler} />
+      {persons}
+    </div>
     );
   }
 }
